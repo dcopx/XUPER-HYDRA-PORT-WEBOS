@@ -1,0 +1,33 @@
+{
+  "hosts": [
+    "mptec.dhkrxuzcy.com",
+    "ftmrmy.jdfey0cd.com",
+    "fuxok.nguvmqhpk.com",
+    "eajmnp.hcgv1dt8.com",
+    "hinumz.a878kkoyc.com",
+    "krdwvd.swcaw7qx.com",
+    "osuhk.m3x8o50te.com",
+    "oogoy.f30c96w8.com"
+  ],
+  "keyHex": "e7af1ed7de1ffddd7bd3fe37ebdffde9ef3fe1ae39edfeb8",
+  "appId": "com.android.msandroid",
+  "apkVer": "49902",
+  "apkVerHeader": "43404",
+  "spkgVer": "2024-09-10 06:25:30_33_13_",
+  "userAgent": "okhttp/3.12.12",
+  "sntokenSalt": "ntFT65w6itH!lHCPw7D=@qnsFC5adD28",
+  "loginType": "2",
+  "hardwareInfo": "ranchu",
+  "model": "sdk_gphone64_arm64",
+  "product": "sdk_gphone64_arm64",
+  "cpu": "arm64-v8a",
+  "reserve1": "583442714b345572434a4d5769637461545a735936413d3d",
+  "drmId": "0iSGEyv2EqiS/nqI/I3hqdu12irw5Q3/uqrWvRFx9bM=",
+  "sdkVer": 33,
+  "appLanguage": "en",
+  "defaultVodFallbackHost": "http://buec.kyalbhxgw.com",
+  "defaultLiveFallbackHost": "buec.kyalbhxgw.com",
+  "defaultMacAddr": "02:00:00:00:00:00",
+  "timeoutSeconds": 8,
+  "searchDebounceSeconds": 2
+}

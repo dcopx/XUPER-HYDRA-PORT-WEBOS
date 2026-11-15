@@ -1,0 +1,59 @@
+name: Sync Upstream & Update Config
+
+on:
+  schedule:
+    # Se ejecuta automáticamente todos los días a las 04:00 UTC
+    - cron: '0 4 * * *'
+  # Permite ejecutarlo manualmente desde la pestaña "Actions" en GitHub con un botón
+  workflow_dispatch:
+  # Se ejecuta si tú haces push modificando directamente magis.js, version.json o el generador
+  push:
+    branches:
+      - main
+    paths:
+      - 'webos/services/com.webosflux.xuptertv.fidelity.service/magis.js'
+      - 'version.json'
+      - 'tools/generate_portal_config.js'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Git Bot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Obtener cambios de upstream (cristianco7)
+        run: |
+          git remote add upstream https://github.com/cristianco7/XUPER-HYDRA-PORT-WEBOS.git || true
+          git fetch upstream main
+          # Intenta fusionar los cambios de upstream a tu rama main
+          git merge upstream/main --no-edit || echo "No hay nuevos commits de upstream o ya está al día."
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generar portal_config.json
+        run: node tools/generate_portal_config.js
+
+      - name: Comitear y subir portal_config.json si cambió
+        run: |
+          git add portal_config.json
+          if ! git diff-index --quiet HEAD -- portal_config.json; then
+            echo "portal_config.json ha cambiado. Creando commit..."
+            git commit -m "chore(config): auto-generate updated portal_config.json from upstream"
+            git push origin main
+          else
+            echo "portal_config.json no tiene cambios nuevos."
+          fi
